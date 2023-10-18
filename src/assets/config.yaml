@@ -1,0 +1,37 @@
+# Configurações gerais do aplicativo
+aplicativo:
+  nome: Meu Aplicativo
+  versao: 1.0
+
+# Configurações do servidor
+servidor:
+  porta: 8080
+  host: localhost
+
+# Configurações de banco de dados
+banco_de_dados:
+  tipo: MySQL
+  host: db.example.com
+  porta: 3306
+  usuario: usuario_db
+  senha: senha_db
+  nome_banco: meu_banco
+
+# Configurações de autenticação
+autenticacao:
+  chave_api: minha_chave_secreta
+  autenticacao_oauth:
+    cliente_id: meu_cliente_id
+    cliente_segredo: meu_cliente_segredo
+
+# Configurações de email
+email:
+  servidor_smtp: smtp.example.com
+  porta_smtp: 587
+  usuario: meu_email@example.com
+  senha: minha_senha_secreta
+
+# Configurações de log
+log:
+  nivel: info
+  arquivo: logs/app.log
