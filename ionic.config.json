@@ -1,0 +1,7 @@
+{
+  "name": "yaml-editor",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "angular-standalone"
+}
