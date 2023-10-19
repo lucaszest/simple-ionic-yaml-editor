@@ -1,7 +1,9 @@
-import { CUSTOM_ELEMENTS_SCHEMA, Component, NgModule } from '@angular/core';
+import { CUSTOM_ELEMENTS_SCHEMA, Component, NgModule, OnInit } from '@angular/core';
 import { IonHeader, IonToolbar, IonTitle, IonContent } from '@ionic/angular/standalone';
 import { ConfigService } from '../config.service';
 import { FormsModule, NgForm } from '@angular/forms';
+import { CommonModule } from '@angular/common';
+import { IonicModule } from '@ionic/angular';
 
 @Component({
   selector: 'app-home',
@@ -14,25 +16,28 @@ import { FormsModule, NgForm } from '@angular/forms';
     IonToolbar,
     IonTitle,
     IonContent,
-    FormsModule
+    FormsModule,
+    CommonModule,
   ],
 })
 export class HomePage {
-  configData: any;
+  configData: any[] = [];
   editableConfig: any
 
   constructor(private configService: ConfigService) { }
 
   ngOnInit() {
-    this.configService.loadConfig()
-      .then((configData) => {
-        console.log('loaded:', configData);
-        this.configData = configData; // Você pode usar os dados aqui
-        this.editableConfig = JSON.parse(JSON.stringify(configData));
-      })
-      .catch((error) => {
-        console.error('Erro ao carregar configurações:', error);
-      });
+    this.configService.loadConfig().then((data) => {
+      for (const section in data) {
+        if (data.hasOwnProperty(section)) {
+          this.configData.push({
+            section: section,
+            items: data[section],
+          });
+        }
+      }
+      console.log(this.configData);
+    });
   }
 
   saveChanges() {

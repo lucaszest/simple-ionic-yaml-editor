@@ -23,8 +23,19 @@ export class ConfigService {
     }
   }
 
-
   getConfig() {
     return this.configData;
+  }
+
+  async saveConfig(updatedConfig: any) {
+    try {
+      // Enviar os dados atualizados para o servidor
+      const response = await this.http.post('URL_DO_SEU_ENDPOINT_API', updatedConfig).toPromise();
+      console.log('Dados salvos com sucesso:', response);
+      this.configData = updatedConfig; // Atualizar os dados locais
+    } catch (error) {
+      console.error('Erro ao salvar dados:', error);
+      throw error;
+    }
   }
 }
